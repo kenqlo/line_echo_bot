@@ -32,8 +32,10 @@ def main(request):
     body = request.get_data(as_text=True)
 
     # チャネルの秘密鍵からシグネチャを取得
-    hashcode = hmac.new(channel_secret.encode('utf-8'),
-                        body.encode('utf-8'), hashlib.sha256).digest()
+    hashcode = hmac.new(
+        channel_secret.encode('utf-8'),
+        body.encode('utf-8'),
+        hashlib.sha256).digest()
     signature = base64.b64encode(hashcode).decode()
 
     # シグネチャの合致判定
